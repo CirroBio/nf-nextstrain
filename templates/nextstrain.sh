@@ -6,6 +6,12 @@ set -e
 echo "Cloning workflow ${params.workflow}"
 git clone https://github.com/nextstrain/${params.workflow}
 
+# Clear the folders which will be used for outputs
+for FOLDER in data results auspice; do
+    rm -rf ${params.workflow}/\$FOLDER
+    mkdir -p ${params.workflow}/\$FOLDER
+done
+
 # Move the input files which have been staged by Nextflow
 # into the data directory expected by the workflow
 echo "Adding sequences and metadata to data directory"
