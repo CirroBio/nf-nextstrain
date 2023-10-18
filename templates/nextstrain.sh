@@ -16,6 +16,10 @@ mv custom.metadata.tsv ${params.workflow}/data/
 # provided as input to the workflow
 echo "Using config:"
 cat configfile.yaml
+echo
+
+# Copy into the data folder
+cp configfile.yaml ${params.workflow}/data/configfile.yaml
 
 # Execute the workflow
 # Note: Using the ambient runtime because this command
@@ -23,5 +27,5 @@ cat configfile.yaml
 echo "Running the workflow"
 nextstrain build \
     --ambient \
-    --configfile configfile.yaml \
-    ${params.workflow}
+    ${params.workflow} \
+    --configfile data/configfile.yaml
